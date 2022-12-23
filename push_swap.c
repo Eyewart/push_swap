@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
+/*   Updated: 2022/12/23 22:08:02 by hrifi-la         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -12,14 +24,13 @@ typedef struct list
 	struct list *next;
 } list;
 
-void addfront ()
+/*void addfront()*/
 
 void	fill_list(list **pile, int *p, int N)
 {
 	list* element = malloc (sizeof(list));
 	if(!element)
 		return (0);
-	element->
 }
 
 void	init_list (list **pile, int nb0)
@@ -33,16 +44,12 @@ int* ft_make_tab(int N, char **arg)
 {
 	int* tab;
 	int i;
-	int j;
 
+	tab = malloc (sizeof(int) * N);
 	i = 0;
-	j = 0;
 	while (i < N)
 	{
-		while (arg[i][j] != 0 )
-		{
-			
-		}
+		tab[i] = ft_atoi(arg[i]);
 		i++;
 	}
 }
