@@ -1,14 +1,40 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int main (int argc, char **argv)
+typedef struct list
+{
+	int val;
+	int index;
+	struct list *next;
+} list;
+
+void	addfront(list **pile, int *val, int index)
+{
+	list* element = malloc (sizeof(list));
+	if(!element)
+		return (0);
+	element->
+}
+
+void	init_list (list **pile, int nb0)
+{
+	*pile = malloc (sizeof(list));
+	(*pile)->index = 0;
+	(*pile)->val = nb0;
+	(*pile)->next = NULL;
+}
+
+int	main (int argc, char **argv)
 {
 	int i;
+	list* pile;
 
-	i = 0;
-	while (argv[i] != NULL)
+	init_list(&pile, argv[0][0]);
+
+	while (i < (argc - 1))
 	{
-		printf ("%s \n", argv[i]);
+		addfront(&pile, argv[argc - 1 - i], i);
 		i++;
 	}
 }
+
