@@ -1,14 +1,20 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+/*
+STILL TO DO:
+ft_is_duplicate
+*/
+
 typedef struct list
 {
 	int val;
-	int index;
 	struct list *next;
 } list;
 
-void	addfront(list **pile, int *val, int index)
+void addfront ()
+
+void	fill_list(list **pile, int *p, int N)
 {
 	list* element = malloc (sizeof(list));
 	if(!element)
@@ -19,22 +25,34 @@ void	addfront(list **pile, int *val, int index)
 void	init_list (list **pile, int nb0)
 {
 	*pile = malloc (sizeof(list));
-	(*pile)->index = 0;
 	(*pile)->val = nb0;
 	(*pile)->next = NULL;
 }
 
-int	main (int argc, char **argv)
+int* ft_make_tab(int N, char **arg)
 {
+	int* tab;
 	int i;
-	list* pile;
+	int j;
 
-	init_list(&pile, argv[0][0]);
-
-	while (i < (argc - 1))
+	i = 0;
+	j = 0;
+	while (i < N)
 	{
-		addfront(&pile, argv[argc - 1 - i], i);
+		while (arg[i][j] != 0 )
+		{
+			
+		}
 		i++;
 	}
+}
+
+int	main (int argc, char **argv)
+{
+	list* pile;
+	int* pile;
+	pile = ft_make_tab(argv, argc);
+	ft_init_list(&pile, argv[0][0]);
+	ft_fill_list(&pile, argv[0], argc);
 }
 
