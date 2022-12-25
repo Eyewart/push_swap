@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/25 12:58:13 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/25 21:45:31 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ STILL TO DO:
 ft_is_duplicate - OK
 bubble_sort - OK
 store indexes in initial array - OK
-read array from N while addfront 
-create functions push, rotate, etc..
+read array from N while addfront - OK
+create functions push, rotate, etc.. - OK
 implement radix / binary sort
 check the particular cases (create main to test)
+ft_is_sorted
+ft_printf
 */
 
 int	ft_is_duplicate(int* list_int, int size)
@@ -85,6 +87,28 @@ int*	ft_copy_tab(int* list_int, int size) // before bubblesorting
 		i++;
 	}
 	return (new_list_int);
+}
+
+void	ft_push(list **pileA, list **pileB)
+{
+	list* tmp;
+	
+	tmp = (*pileA)->next;
+	(*pileA)->next = *pileB; 
+	(*pileA) = tmp;
+}
+
+void	ft_rotate(list **pile)
+{
+	list* tmp1;
+	list* tmp2;
+
+	tmp1 = *pile;
+	tmp2 = (*pile)->next;
+	while (tmp1->next != NULL)
+		tmp1 = tmp1->next;
+	(*pile)->next = tmp1;
+	*pile = tmp2;
 }
 
 void	ft_addfront(list **pile, int value)
@@ -173,19 +197,65 @@ int*	ft_sort_indexes(int* sorted_tab, int* saved_tab, int size)
 	return (tab_with_indexes);
 }
 
+unsigned int ft_count_bits (int n)
+{
+	int count;
+
+	count = 0;
+	while (n)
+	{
+		count++; //shift operator won't go to negative number
+		n >>= 1;
+	}
+	return (count);
+}
+
+void	ft_radix(list **pileA, list** pileB, int size, int nb_bits)
+{
+	int i;
+	int j;
+	int mask;
+
+	i = 0;
+	j = 0;
+	mask = 1;
+	//printf("%d, %d", size, nb_bits);
+	while (i <= nb_bits)
+	{
+		printf(" : %d, : %d", , );
+		while (j < size)
+		{
+			if (((*pileA)->val & mask) == 0)
+				ft_push(pileA, pileB);
+			else
+				ft_rotate(pileA);
+			j++;
+		}
+		while ((*pileB) != NULL)
+			ft_push(pileB, pileA);
+		i++;
+		mask *= 2;
+	}
+}
+
 int	main (int argc, char **argv)
 {
-	list*	pile_of_int;
+	list*	pileA;
+	list*	pileB;
 	int*	tab_of_int;
 	int*	save_tab;
 	int*	absolute_tab;
+	int		nb_bits;
 	
-	ft_init_list(&pile_of_int);
+	ft_init_list(&pileA);
 	tab_of_int = ft_make_tab(argc - 1, &argv[1]);
 	save_tab = ft_copy_tab(tab_of_int, argc - 1);
 	ft_bubblesort(&tab_of_int, argc - 1);
 	absolute_tab = ft_sort_indexes(tab_of_int, save_tab, argc - 1);
-	ft_fill_list(&pile_of_int, absolute_tab, argc - 1);
-	ft_display_list(pile_of_int);
+	ft_fill_list(&pileA, absolute_tab, argc - 1);
+	nb_bits = ft_count_bits (argc - 1);
+	//ft_display_list(pileA);
+	ft_init_list(&pileB);
+	ft_radix(&pileA, &pileB, argc - 1, nb_bits);
 }
 

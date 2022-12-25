@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 19:58:42 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/24 00:43:36 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/25 19:08:21 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void ft_exit()
 {
 	char *str;
 
-	str = "Error";
+	str = "Error\n";
 	write(2, str, ft_strlen(str));
 
 	exit(1);
