@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 19:58:42 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/23 22:07:59 by hrifi-la         ###   ########.fr       */
+/*   Updated: 2022/12/24 00:43:36 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <push_swap.h>
+#include "push_swap.h"
 
 int	ft_isdigit(int c)
 {
@@ -27,6 +27,16 @@ size_t	ft_strlen(const char *c)
 	while (c[i])
 		i++;
 	return (i);
+}
+
+void ft_exit()
+{
+	char *str;
+
+	str = "Error";
+	write(2, str, ft_strlen(str));
+
+	exit(1);
 }
 
 static long	int	get_result(const char *str, int sign)
@@ -47,16 +57,6 @@ static long	int	get_result(const char *str, int sign)
 	if (str[j] != 0)
 		ft_exit();
 	return ((int)result * sign);
-}
-
-void ft_exit()
-{
-	char *str;
-
-	str = "Error";
-	write(2, str, ft_strlen(str));
-
-	exit(1);
 }
 
 int	ft_atoi(const char *str)
