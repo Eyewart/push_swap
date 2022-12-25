@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/25 23:01:22 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/25 23:47:58 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ implement radix / binary sort
 check the particular cases (create main to test)
 ft_is_sorted
 ft_printf
-
 */
 
 int	ft_is_duplicate(int* list_int, int size)
@@ -233,7 +232,7 @@ void	ft_radix(list **pileA, list** pileB, int nb_elements, int nb_bits)
 			if (((*pileA)->val & mask) == 0)
 			{
 				ft_push(pileA, pileB);
-				printf("pa\n");
+				printf("pb\n");
 			}
 
 			else
@@ -251,7 +250,7 @@ void	ft_radix(list **pileA, list** pileB, int nb_elements, int nb_bits)
 		while ((*pileB) != NULL)
 		{
 			ft_push(pileB, pileA);
-			printf("pb\n");
+			printf("pa\n");
 		}
 		i++;
 		mask *= 2;
