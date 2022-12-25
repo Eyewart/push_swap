@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/25 21:45:31 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/25 23:01:22 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ implement radix / binary sort
 check the particular cases (create main to test)
 ft_is_sorted
 ft_printf
+
 */
 
 int	ft_is_duplicate(int* list_int, int size)
@@ -95,19 +96,23 @@ void	ft_push(list **pileA, list **pileB)
 	
 	tmp = (*pileA)->next;
 	(*pileA)->next = *pileB; 
-	(*pileA) = tmp;
+	*pileB = *pileA;
+	*pileA = tmp;
 }
 
 void	ft_rotate(list **pile)
 {
 	list* tmp1;
 	list* tmp2;
+	list* tmp3;
 
 	tmp1 = *pile;
 	tmp2 = (*pile)->next;
-	while (tmp1->next != NULL)
-		tmp1 = tmp1->next;
+	while ((*pile)->next != NULL)
+		(*pile) = (*pile)->next;
 	(*pile)->next = tmp1;
+	(*pile) = (*pile)->next;
+	(*pile)->next = NULL;
 	*pile = tmp2;
 }
 
@@ -210,29 +215,44 @@ unsigned int ft_count_bits (int n)
 	return (count);
 }
 
-void	ft_radix(list **pileA, list** pileB, int size, int nb_bits)
+void	ft_radix(list **pileA, list** pileB, int nb_elements, int nb_bits)
 {
 	int i;
 	int j;
 	int mask;
 
 	i = 0;
-	j = 0;
 	mask = 1;
 	//printf("%d, %d", size, nb_bits);
 	while (i <= nb_bits)
 	{
-		printf(" : %d, : %d", , );
-		while (j < size)
+		j = 0;
+		//printf("i : %d, mask: %d\n", i, mask);
+		while (j < nb_elements)
 		{
 			if (((*pileA)->val & mask) == 0)
+			{
 				ft_push(pileA, pileB);
+				printf("pa\n");
+			}
+
 			else
+			{
 				ft_rotate(pileA);
+				printf("ra\n");				
+			}
+
 			j++;
+			/*printf("A:");
+			ft_display_list(*pileA);
+			printf("\nB: ");
+			ft_display_list(*pileB);*/
 		}
 		while ((*pileB) != NULL)
+		{
 			ft_push(pileB, pileA);
+			printf("pb\n");
+		}
 		i++;
 		mask *= 2;
 	}
@@ -257,5 +277,8 @@ int	main (int argc, char **argv)
 	//ft_display_list(pileA);
 	ft_init_list(&pileB);
 	ft_radix(&pileA, &pileB, argc - 1, nb_bits);
+	/*printf("\n\n\nFINAL RESULT\n");
+	ft_display_list(pileA);
+	ft_display_list(pileB)*/
 }
 
