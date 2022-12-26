@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/25 23:47:58 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/26 23:17:13 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bubble_sort - OK
 store indexes in initial array - OK
 read array from N while addfront - OK
 create functions push, rotate, etc.. - OK
-implement radix / binary sort
+implement radix / binary sort - OK
 check the particular cases (create main to test)
 ft_is_sorted
 ft_printf
@@ -89,7 +89,7 @@ int*	ft_copy_tab(int* list_int, int size) // before bubblesorting
 	return (new_list_int);
 }
 
-void	ft_push(list **pileA, list **pileB)
+void	ft_push(list **pileA, list **pileB, char c)
 {
 	list* tmp;
 	
@@ -97,6 +97,7 @@ void	ft_push(list **pileA, list **pileB)
 	(*pileA)->next = *pileB; 
 	*pileB = *pileA;
 	*pileA = tmp;
+	printf("p%c\n", c);
 }
 
 void	ft_rotate(list **pile)
@@ -113,6 +114,7 @@ void	ft_rotate(list **pile)
 	(*pile) = (*pile)->next;
 	(*pile)->next = NULL;
 	*pile = tmp2;
+	printf("ra\n");
 }
 
 void	ft_addfront(list **pile, int value)
@@ -214,6 +216,20 @@ unsigned int ft_count_bits (int n)
 	return (count);
 }
 
+int	ft_is_sorted(list* pile)
+{
+	list* tmp;
+
+	tmp = pile;
+	while (tmp->next != NULL)
+	{
+		if (tmp->next->val != (tmp->val + 1))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
 void	ft_radix(list **pileA, list** pileB, int nb_elements, int nb_bits)
 {
 	int i;
@@ -222,38 +238,43 @@ void	ft_radix(list **pileA, list** pileB, int nb_elements, int nb_bits)
 
 	i = 0;
 	mask = 1;
-	//printf("%d, %d", size, nb_bits);
 	while (i <= nb_bits)
 	{
 		j = 0;
-		//printf("i : %d, mask: %d\n", i, mask);
 		while (j < nb_elements)
 		{
 			if (((*pileA)->val & mask) == 0)
-			{
-				ft_push(pileA, pileB);
-				printf("pb\n");
-			}
-
+				ft_push(pileA, pileB, 'b');
 			else
-			{
 				ft_rotate(pileA);
-				printf("ra\n");				
-			}
-
 			j++;
-			/*printf("A:");
-			ft_display_list(*pileA);
-			printf("\nB: ");
-			ft_display_list(*pileB);*/
 		}
 		while ((*pileB) != NULL)
-		{
-			ft_push(pileB, pileA);
-			printf("pa\n");
-		}
+			ft_push(pileB, pileA, 'a');
+		if (ft_is_sorted(*pileA))
+			return;
 		i++;
 		mask *= 2;
+	}
+}
+
+void	ft_shortsort(list **pileA, list** pileB, int nb_elements)
+{
+	if (nb_elements == 1)
+		return;
+	if (nb_elements == 2)
+	{
+		if ((*pileA)->val > (*pileA)->next->val)
+			ft_rotate(pileA);	
+	}
+	if (nb_elements == 3)
+	{
+		if ((*pileA)->val > (*pileA)->next->val)
+			ft_rotate(pileA);
+				if ((*pileA)->val > (*pileA)->next->val)
+					ft_rotate(pileA);
+		else
+			ft_push(pileA, pileB, 'b');
 	}
 }
 
@@ -273,11 +294,7 @@ int	main (int argc, char **argv)
 	absolute_tab = ft_sort_indexes(tab_of_int, save_tab, argc - 1);
 	ft_fill_list(&pileA, absolute_tab, argc - 1);
 	nb_bits = ft_count_bits (argc - 1);
-	//ft_display_list(pileA);
 	ft_init_list(&pileB);
 	ft_radix(&pileA, &pileB, argc - 1, nb_bits);
-	/*printf("\n\n\nFINAL RESULT\n");
-	ft_display_list(pileA);
-	ft_display_list(pileB)*/
 }
 
