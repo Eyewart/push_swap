@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/27 23:17:28 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/28 00:37:39 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ read array from N while addfront - OK
 create functions push, rotate, etc.. - OK
 implement radix / binary sort - OK
 check the particular cases (create main to test)
-ft_is_sorted
 ft_printf
+protect malloc
+no memory leaks
+valgrind
 */
 
 int	ft_is_duplicate(int* list_int, int size)
