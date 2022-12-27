@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/26 23:17:13 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/27 23:17:28 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ void	ft_rotate(list **pile)
 {
 	list* tmp1;
 	list* tmp2;
-	list* tmp3;
 
 	tmp1 = *pile;
 	tmp2 = (*pile)->next;
@@ -115,6 +114,39 @@ void	ft_rotate(list **pile)
 	(*pile)->next = NULL;
 	*pile = tmp2;
 	printf("ra\n");
+}
+
+void	ft_swap(list **pile)
+{
+	list *tmp1;
+	list *tmp2;
+	list *tmp3;
+
+	tmp1 = *pile;
+	tmp2 = (*pile)->next;
+	*pile = (*pile)->next;
+	tmp3 = (*pile)->next;
+	(*pile)->next = tmp1;
+	(*pile) = (*pile)->next;
+	(*pile)->next = tmp2;
+	(*pile) = tmp2;
+	printf("sa\n");
+}
+
+void	ft_reverse_rotate(list **pile)
+{
+	list* tmp1;
+	list* tmp2;
+
+	tmp1 = *pile;
+	while ((*pile)->next->next != NULL)
+		(*pile) = (*pile)->next;
+	tmp2 = (*pile);
+	(*pile) = (*pile)->next;
+	(*pile)->next = tmp1;
+	(*pile) = tmp2;
+	(*pile)->next = NULL;
+	printf("rra\n");
 }
 
 void	ft_addfront(list **pile, int value)
