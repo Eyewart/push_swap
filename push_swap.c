@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/28 00:37:39 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/28 22:07:28 by hrifi-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,24 +292,115 @@ void	ft_radix(list **pileA, list** pileB, int nb_elements, int nb_bits)
 	}
 }
 
-void	ft_shortsort(list **pileA, list** pileB, int nb_elements)
+int		ft_get_min(list **pile, int size)
+{
+	int index;
+	int count;
+	list* tmp;
+	int min_val;
+
+	min_val = tmp->val;
+	tmp = *pile;
+	count = 1;
+	while (tmp != NULL)
+	{
+		if (tmp->val < min_val)
+		{
+			min_val = tmp->val;
+			index = count;
+		}
+		tmp = tmp->next;
+	}
+	return (index);
+}
+
+int		ft_get_max(list **pile, int size)
+{
+	int count;
+	int index;
+	list* tmp;
+	int max_val;
+
+	max_val = tmp->val;
+	tmp = *pile;
+	count = 1;
+	while (tmp != NULL)
+	{
+		if (tmp->val > max_val)
+		{
+			max_val = tmp->val;
+			index = count;
+		}
+		tmp = tmp->next;
+	}
+	return (index);
+}
+
+int	ft_size_list(list** pile)
+{
+	int i;
+	list* tmp;
+
+	tmp = *pile;
+	i = 0;
+	while (tmp != NULL)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+void	ft_decision_3(list** pileA, list** pileB, int nb_elements)
 {
 	if (nb_elements == 1)
-		return;
-	if (nb_elements == 2)
+		return ;
+	while (ft_size_list(*pileA) > 3)
+		ft_shortsort(*pileA, *pileB, nb_elements);
+	ft_algo_23(*pileA); // nb_elements == 2 OR 3
+	while ((*pileB) != NULL)
+		ft_push(pileB, pileA, 'a');
+}
+
+void	ft_shortsort(list** pileA, list** pileB, int nb_elements)
+{
+	int min_index;
+
+	min_index = ft_get_min(*pileA, nb_elements);
+	if (min_index < ft_size_list(*pileA) / 2)
 	{
-		if ((*pileA)->val > (*pileA)->next->val)
-			ft_rotate(pileA);	
+		while (min_index > 1)
+		{
+			ft_rotate(*pileA);
+			min_index--;
+		}
+		ft_push(*pileA, *pileB, 'b');
 	}
-	if (nb_elements == 3)
+	else if (min_index > ft_size_list(*pileA) / 2)
 	{
-		if ((*pileA)->val > (*pileA)->next->val)
-			ft_rotate(pileA);
-				if ((*pileA)->val > (*pileA)->next->val)
-					ft_rotate(pileA);
+		while (min_index <= ft_size_list(*pileA))
+		{
+			ft_reverse_rotate(*pileA);
+			min_index++;
+		}
+		ft_push(*pileA, *pileB, 'b');
+	}
+}
+
+void	ft_algo_23(list** pile)
+{
+	int size;
+
+	size = ft_size_list(*pile);
+	if (ft_get_max(*pile, size) != size)
+	{
+		if ((*pile)->val > (*pile)->next->val)
+			ft_rotate(*pile);
 		else
-			ft_push(pileA, pileB, 'b');
+			ft_reverse_rotate(*pile);
 	}
+	if ((*pile)->val > (*pile)->next)
+		ft_swap(*pile);
 }
 
 int	main (int argc, char **argv)
@@ -329,6 +420,9 @@ int	main (int argc, char **argv)
 	ft_fill_list(&pileA, absolute_tab, argc - 1);
 	nb_bits = ft_count_bits (argc - 1);
 	ft_init_list(&pileB);
-	ft_radix(&pileA, &pileB, argc - 1, nb_bits);
+	if (argc - 1 < 10)
+		ft_decision_3(&pileA, &pileB, argc - 1);
+	else
+		ft_radix(&pileA, &pileB, argc - 1, nb_bits);
 }
 
