@@ -6,7 +6,7 @@
 /*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:25:57 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/29 16:44:50 by hrifi-la         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:21:00 by hrifi-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ft_addfront(t_list **pile, int value)
 
 	element = malloc (sizeof(t_list) * 1);
 	if (!element)
-		return ;
+		ft_exit();
 	element->val = value;
 	element->next = *pile;
 	*pile = element;

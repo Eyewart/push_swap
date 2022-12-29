@@ -6,7 +6,7 @@
 /*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/29 16:49:54 by hrifi-la         ###   ########.fr       */
+/*   Updated: 2022/12/29 18:27:00 by hrifi-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	*ft_sort_indexes(int *sorted_tab, int *saved_tab, int size)
 	tab_with_indexes = malloc(sizeof(int) * size);
 	i = 0;
 	if (!tab_with_indexes)
-		return (NULL);
+		ft_exit();
 	while (i < size)
 	{
 		j = 0;
