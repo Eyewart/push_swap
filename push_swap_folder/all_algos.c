@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   all_algos.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:20:46 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/29 13:19:53 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 16:44:35 by hrifi-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_shortsort(list** pileA, list** pileB)
+void	ft_shortsort(t_list **pileA, t_list **pileB)
 {
-	int min_index;
+	int	min_index;
 
 	min_index = ft_get_min(pileA);
 	if (min_index <= ft_size_list(pileA) / 2)
@@ -37,9 +37,9 @@ void	ft_shortsort(list** pileA, list** pileB)
 	}
 }
 
-void	ft_algo_23(list** pile)
+void	ft_algo_23(t_list **pile)
 {
-	int size;
+	int	size;
 
 	size = ft_size_list(pile);
 	if (ft_get_max(pile) != size)
@@ -53,11 +53,11 @@ void	ft_algo_23(list** pile)
 		ft_swap(pile);
 }
 
-void	ft_radix(list **pileA, list** pileB, int nb_elements, int nb_bits)
+void	ft_radix(t_list **pileA, t_list **pileB, int nb_elements, int nb_bits)
 {
-	int i;
-	int j;
-	int mask;
+	int	i;
+	int	j;
+	int	mask;
 
 	i = 0;
 	mask = 1;
@@ -75,18 +75,18 @@ void	ft_radix(list **pileA, list** pileB, int nb_elements, int nb_bits)
 		while ((*pileB) != NULL)
 			ft_push(pileB, pileA, 'a');
 		if (ft_is_sorted(*pileA))
-			return;
+			return ;
 		i++;
 		mask *= 2;
 	}
 }
 
-int		ft_get_min(list **pile)
+int	ft_get_min(t_list **pile)
 {
-	int index;
-	int count;
-	list* tmp;
-	int min_val;
+	int		index;
+	int		count;
+	t_list	*tmp;
+	int		min_val;
 
 	tmp = *pile;
 	min_val = tmp->val;
@@ -105,12 +105,12 @@ int		ft_get_min(list **pile)
 	return (index);
 }
 
-int		ft_get_max(list **pile)
+int	ft_get_max(t_list **pile)
 {
-	int count;
-	int index;
-	list* tmp;
-	int max_val;
+	int		count;
+	int		index;
+	t_list	*tmp;
+	int		max_val;
 
 	tmp = *pile;
 	max_val = tmp->val;

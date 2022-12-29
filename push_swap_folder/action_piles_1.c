@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   action_piles_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:25:16 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/29 12:51:09 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 16:43:51 by hrifi-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_push(list **pileA, list **pileB, char c)
+void	ft_push(t_list **pileA, t_list **pileB, char c)
 {
-	list* tmp;
-	
+	t_list	*tmp;
+
 	tmp = (*pileA)->next;
-	(*pileA)->next = *pileB; 
+	(*pileA)->next = *pileB;
 	*pileB = *pileA;
 	*pileA = tmp;
 	ft_printf("p%c\n", c);
 }
 
-void	ft_rotate(list **pile)
+void	ft_rotate(t_list **pile)
 {
-	list* tmp1;
-	list* tmp2;
+	t_list	*tmp1;
+	t_list	*tmp2;
 
 	tmp1 = *pile;
 	tmp2 = (*pile)->next;
@@ -39,11 +39,11 @@ void	ft_rotate(list **pile)
 	ft_printf("ra\n");
 }
 
-void	ft_swap(list **pile)
+void	ft_swap(t_list **pile)
 {
-	list *tmp1;
-	list *tmp2;
-	list *tmp3;
+	t_list	*tmp1;
+	t_list	*tmp2;
+	t_list	*tmp3;
 
 	tmp1 = *pile;
 	tmp2 = (*pile)->next;
@@ -56,11 +56,11 @@ void	ft_swap(list **pile)
 	ft_printf("sa\n");
 }
 
-void	ft_reverse_rotate(list **pile)
+void	ft_reverse_rotate(t_list **pile)
 {
-	list* tmp1;
-	list* tmp2;
-	list* tmp3;
+	t_list	*tmp1;
+	t_list	*tmp2;
+	t_list	*tmp3;
 
 	tmp1 = *pile;
 	while ((*pile)->next->next != NULL)
@@ -75,12 +75,12 @@ void	ft_reverse_rotate(list **pile)
 	ft_printf("rra\n");
 }
 
-void	ft_display_list(list *ptr)
+void	ft_display_list(t_list *ptr)
 {
-	list*	tmp;
+	t_list	*tmp;
 
 	tmp = ptr;
-	while(tmp != NULL)
+	while (tmp != NULL)
 	{
 		ft_printf("%d\n", tmp->val);
 		tmp = tmp->next;

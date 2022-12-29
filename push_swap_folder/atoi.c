@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 19:58:42 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/29 14:14:50 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 16:10:26 by hrifi-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,12 @@ size_t	ft_strlen(const char *c)
 	return (i);
 }
 
-void ft_exit()
+void	ft_exit(void)
 {
-	char *str;
+	char	*str;
 
 	str = "Error\n";
 	write(2, str, ft_strlen(str));
-
 	exit(1);
 }
 
@@ -48,8 +47,8 @@ static long	int	get_result(const char *str, int sign)
 	result = 0;
 	while (ft_isdigit(str[j]))
 		result = 10 * result + (str[j++] - '0');
-	if ((sign == 1 && result > 2147483647) 
-	|| (sign == -1 && result > 2147483648))
+	if ((sign == 1 && result > 2147483647)
+		|| (sign == -1 && result > 2147483648))
 		ft_exit();
 	if (str[j] != 0)
 		ft_exit();

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   create_tab_int.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:35:10 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/29 12:36:46 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 16:12:45 by hrifi-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int*	ft_make_tab(int N, char **arg)
+int	*ft_make_tab(int N, char **arg)
 {
-	int*	tab;
+	int		*tab;
 	int		i;
 
 	tab = malloc (sizeof(int) * N);
-	if(!tab)
+	if (!tab)
 		return (NULL);
 	i = 0;
 	while (i < N)
@@ -29,11 +29,11 @@ int*	ft_make_tab(int N, char **arg)
 	return (tab);
 }
 
-void	ft_bubblesort(int** list_int, int size)
+void	ft_bubblesort(int **list_int, int size)
 {
-	int i;
-	int j;
-	int tmp;
+	int	i;
+	int	j;
+	int	tmp;
 
 	i = 0;
 	while (i < size - 1)
@@ -53,14 +53,14 @@ void	ft_bubblesort(int** list_int, int size)
 	}
 }
 
-int*	ft_copy_tab(int* list_int, int size) // before bubblesorting
+int	*ft_copy_tab(int *list_int, int size)
 {
-	int i;
-	int* new_list_int;
+	int	i;
+	int	*new_list_int;
 
 	i = 0;
 	new_list_int = malloc(sizeof(int) * size);
-	if(!new_list_int)
+	if (!new_list_int)
 		return (NULL);
 	while (i < size)
 	{

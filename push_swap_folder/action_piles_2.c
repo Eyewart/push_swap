@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   action_piles_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
+/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:31:48 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/29 14:52:06 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 16:44:11 by hrifi-la         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_is_sorted(list* pile)
+int	ft_is_sorted(t_list *pile)
 {
-	list* tmp;
+	t_list	*tmp;
 
 	tmp = pile;
 	while (tmp->next != NULL)
@@ -26,10 +26,10 @@ int	ft_is_sorted(list* pile)
 	return (1);
 }
 
-int	ft_size_list(list** pile)
+int	ft_size_list(t_list **pile)
 {
-	int i;
-	list* tmp;
+	int		i;
+	t_list	*tmp;
 
 	tmp = *pile;
 	i = 0;
@@ -41,9 +41,15 @@ int	ft_size_list(list** pile)
 	return (i);
 }
 
-void	ft_free_list(list** pile)
+void	ft_free_lists(t_list **pile1, t_list **pile2)
 {
-	list* tmp;
+	ft_free_list(pile1);
+	ft_free_list(pile2);
+}
+
+void	ft_free_list(t_list **pile)
+{
+	t_list	*tmp;
 
 	while ((*pile) != NULL)
 	{
