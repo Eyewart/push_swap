@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+         #
+#    By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 12:13:47 by Hassan            #+#    #+#              #
-#    Updated: 2022/12/29 14:40:18 by Hassan           ###   ########.fr        #
+#    Updated: 2022/12/29 17:50:30 by hrifi-la         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS =	./push_swap_folder/init_list.c \
 		./push_swap_folder/action_piles_2.c \
