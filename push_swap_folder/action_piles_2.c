@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 12:31:48 by Hassan            #+#    #+#             */
-/*   Updated: 2022/12/29 12:31:57 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 14:52:06 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,16 @@ int	ft_size_list(list** pile)
 		i++;
 	}
 	return (i);
+}
+
+void	ft_free_list(list** pile)
+{
+	list* tmp;
+
+	while ((*pile) != NULL)
+	{
+		tmp = *pile;
+		(*pile) = (*pile)->next;
+		free (tmp);
+	}
 }

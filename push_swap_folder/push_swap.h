@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:30 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/29 14:19:34 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 14:52:53 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		ft_get_min(list **pile);
 int		ft_get_max(list **pile);
 int	ft_isdigit(int c);
 size_t	ft_strlen(const char *c);
-void ft_exit();
+void ft_exit(void);
 int	ft_atoi(const char *str);
 int*	ft_make_tab(int N, char **arg);
 void	ft_bubblesort(int** list_int, int size);
@@ -47,3 +47,4 @@ unsigned int ft_count_bits (int n);
 int*	ft_sort_indexes(int* sorted_tab, int* saved_tab, int size);
 void	ft_decision_3(list** pileA, list** pileB, int nb_elements);
 int	ft_printf(const char *c, ...);
+void	ft_free_list(list** pile);

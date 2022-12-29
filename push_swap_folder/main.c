@@ -6,31 +6,11 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/29 13:56:25 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 14:52:27 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "push_swap.h"
-
-/*
-TO DO:
-ft_is_duplicate - OK
-bubble_sort - OK
-store indexes in initial array - OK
-read array from N while addfront - OK
-create functions push, rotate, etc.. - OK
-implement radix / binary sort - OK
-check the particular cases (create main to test) - OK
-makefile - OK
-ft_printf - OK
-is_duplicate - OK
-cas d'erreur
-protect malloc
-no memory leaks
-valgrind
-*/
 
 int	ft_is_duplicate(int* list_int, int size)
 {
@@ -119,12 +99,17 @@ int	main (int argc, char **argv)
 	save_tab = ft_copy_tab(tab_of_int, argc - 1);
 	ft_bubblesort(&tab_of_int, argc - 1);
 	absolute_tab = ft_sort_indexes(tab_of_int, save_tab, argc - 1);
+	free(save_tab);
+	free(tab_of_int);
 	ft_fill_list(&pileA, absolute_tab, argc - 1);
+	free(absolute_tab);
 	nb_bits = ft_count_bits (argc - 1);
 	ft_init_list(&pileB);
 	if (argc - 1 < 10)
 		ft_decision_3(&pileA, &pileB, argc - 1);
 	else if (!ft_is_sorted(pileA))
 		ft_radix(&pileA, &pileB, argc - 1, nb_bits);
+	ft_free_list(&pileA);
+	ft_free_list(&pileB);
 }
 
