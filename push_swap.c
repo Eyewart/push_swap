@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hrifi-la <hrifi-la@student.s19.be>         +#+  +:+       +#+        */
+/*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/28 22:07:28 by hrifi-la         ###   ########.fr       */
+/*   Updated: 2022/12/29 02:14:07 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	ft_bubblesort(int** list_int, int size)
 		j = i + 1;
 		while (j < size)
 		{
-			//printf("%d\n", list_int[0][i]);
 			if (list_int[0][i] > list_int[0][j])
 			{
 				tmp = list_int[0][j];
@@ -130,7 +129,7 @@ void	ft_swap(list **pile)
 	tmp3 = (*pile)->next;
 	(*pile)->next = tmp1;
 	(*pile) = (*pile)->next;
-	(*pile)->next = tmp2;
+	(*pile)->next = tmp3;
 	(*pile) = tmp2;
 	printf("sa\n");
 }
@@ -139,15 +138,18 @@ void	ft_reverse_rotate(list **pile)
 {
 	list* tmp1;
 	list* tmp2;
+	list* tmp3;
 
 	tmp1 = *pile;
 	while ((*pile)->next->next != NULL)
 		(*pile) = (*pile)->next;
 	tmp2 = (*pile);
+	tmp3 = (*pile)->next;
 	(*pile) = (*pile)->next;
 	(*pile)->next = tmp1;
 	(*pile) = tmp2;
 	(*pile)->next = NULL;
+	(*pile) = tmp3;
 	printf("rra\n");
 }
 
@@ -299,9 +301,10 @@ int		ft_get_min(list **pile, int size)
 	list* tmp;
 	int min_val;
 
-	min_val = tmp->val;
 	tmp = *pile;
+	min_val = tmp->val;
 	count = 1;
+	index = count;
 	while (tmp != NULL)
 	{
 		if (tmp->val < min_val)
@@ -310,6 +313,7 @@ int		ft_get_min(list **pile, int size)
 			index = count;
 		}
 		tmp = tmp->next;
+		count++;
 	}
 	return (index);
 }
@@ -321,9 +325,10 @@ int		ft_get_max(list **pile, int size)
 	list* tmp;
 	int max_val;
 
-	max_val = tmp->val;
 	tmp = *pile;
+	max_val = tmp->val;
 	count = 1;
+	index = count;
 	while (tmp != NULL)
 	{
 		if (tmp->val > max_val)
@@ -332,6 +337,7 @@ int		ft_get_max(list **pile, int size)
 			index = count;
 		}
 		tmp = tmp->next;
+		count++;
 	}
 	return (index);
 }
@@ -351,39 +357,28 @@ int	ft_size_list(list** pile)
 	return (i);
 }
 
-void	ft_decision_3(list** pileA, list** pileB, int nb_elements)
-{
-	if (nb_elements == 1)
-		return ;
-	while (ft_size_list(*pileA) > 3)
-		ft_shortsort(*pileA, *pileB, nb_elements);
-	ft_algo_23(*pileA); // nb_elements == 2 OR 3
-	while ((*pileB) != NULL)
-		ft_push(pileB, pileA, 'a');
-}
-
 void	ft_shortsort(list** pileA, list** pileB, int nb_elements)
 {
 	int min_index;
 
-	min_index = ft_get_min(*pileA, nb_elements);
-	if (min_index < ft_size_list(*pileA) / 2)
+	min_index = ft_get_min(pileA, nb_elements);
+	if (min_index <= ft_size_list(pileA) / 2)
 	{
 		while (min_index > 1)
 		{
-			ft_rotate(*pileA);
+			ft_rotate(pileA);
 			min_index--;
 		}
-		ft_push(*pileA, *pileB, 'b');
+		ft_push(pileA, pileB, 'b');
 	}
-	else if (min_index > ft_size_list(*pileA) / 2)
+	else if (min_index > ft_size_list(pileA) / 2)
 	{
-		while (min_index <= ft_size_list(*pileA))
+		while (min_index <= ft_size_list(pileA))
 		{
-			ft_reverse_rotate(*pileA);
+			ft_reverse_rotate(pileA);
 			min_index++;
 		}
-		ft_push(*pileA, *pileB, 'b');
+		ft_push(pileA, pileB, 'b');
 	}
 }
 
@@ -391,16 +386,29 @@ void	ft_algo_23(list** pile)
 {
 	int size;
 
-	size = ft_size_list(*pile);
-	if (ft_get_max(*pile, size) != size)
+	size = ft_size_list(pile);
+	if (ft_get_max(pile, size) != size)
 	{
 		if ((*pile)->val > (*pile)->next->val)
-			ft_rotate(*pile);
+			ft_rotate(pile);
 		else
-			ft_reverse_rotate(*pile);
+			ft_reverse_rotate(pile);
 	}
-	if ((*pile)->val > (*pile)->next)
-		ft_swap(*pile);
+	if ((*pile)->val > (*pile)->next->val)
+		ft_swap(pile);
+}
+
+void	ft_decision_3(list** pileA, list** pileB, int nb_elements)
+{
+	if (nb_elements <= 1)
+		return ;
+	else if (ft_is_sorted(*pileA))
+		return ;
+	while (ft_size_list(pileA) > 3)
+		ft_shortsort(pileA, pileB, nb_elements);
+	ft_algo_23(pileA); // nb_elements == 2 OR 3
+	while ((*pileB) != NULL)
+		ft_push(pileB, pileA, 'a');
 }
 
 int	main (int argc, char **argv)
