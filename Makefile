@@ -6,7 +6,7 @@
 #    By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 12:13:47 by Hassan            #+#    #+#              #
-#    Updated: 2022/12/29 13:21:24 by Hassan           ###   ########.fr        #
+#    Updated: 2022/12/29 14:21:09 by Hassan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,6 @@ CFLAGS = -Wall -Wextra -Werror
 
 SRCS =	./push_swap_folder/init_list.c \
 		./push_swap_folder/action_piles_2.c \
-		./push_swap_folder/push_swap.h  \
 		./push_swap_folder/main.c \
 		./push_swap_folder/create_tab_int.c \
 		./push_swap_folder/atoi.c \

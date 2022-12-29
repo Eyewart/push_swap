@@ -6,7 +6,7 @@
 /*   By: Hassan <hrifi-la@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/23 22:00:42 by hrifi-la          #+#    #+#             */
-/*   Updated: 2022/12/29 13:40:37 by Hassan           ###   ########.fr       */
+/*   Updated: 2022/12/29 13:56:25 by Hassan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ read array from N while addfront - OK
 create functions push, rotate, etc.. - OK
 implement radix / binary sort - OK
 check the particular cases (create main to test) - OK
-makefile
-ft_printf
-is_duplicate
+makefile - OK
+ft_printf - OK
+is_duplicate - OK
 cas d'erreur
 protect malloc
 no memory leaks
@@ -94,9 +94,7 @@ int*	ft_sort_indexes(int* sorted_tab, int* saved_tab, int size)
 
 void	ft_decision_3(list** pileA, list** pileB, int nb_elements)
 {
-	if (nb_elements <= 1)
-		return ;
-	else if (ft_is_sorted(*pileA))
+	if (nb_elements <= 1 || ft_is_sorted(*pileA))
 		return ;
 	while (ft_size_list(pileA) > 3)
 		ft_shortsort(pileA, pileB);
@@ -116,6 +114,8 @@ int	main (int argc, char **argv)
 	
 	ft_init_list(&pileA);
 	tab_of_int = ft_make_tab(argc - 1, &argv[1]);
+	if(ft_is_duplicate(tab_of_int, argc - 1))
+		ft_exit();
 	save_tab = ft_copy_tab(tab_of_int, argc - 1);
 	ft_bubblesort(&tab_of_int, argc - 1);
 	absolute_tab = ft_sort_indexes(tab_of_int, save_tab, argc - 1);
@@ -124,7 +124,7 @@ int	main (int argc, char **argv)
 	ft_init_list(&pileB);
 	if (argc - 1 < 10)
 		ft_decision_3(&pileA, &pileB, argc - 1);
-	else
+	else if (!ft_is_sorted(pileA))
 		ft_radix(&pileA, &pileB, argc - 1, nb_bits);
 }
 
